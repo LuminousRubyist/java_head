@@ -272,20 +272,16 @@ module JavaHead
   end
   
   # An array of Pathnames representing the CLASSPATH environment variable
-  # Defaults to . and sources from classpath.txt config file if it exists in the same
-  # directory as __FILE__
-  CLASSPATH = ['.']
-  # initialize CLASSPATH from config file if present
-  Dir.chdir(__dir__) do
-    if File.exist? 'classpath.txt'
-      File.open('classpath.txt','r') do |file|
-        file.each_line do |string|
-          CLASSPATH.push(string.chomp)
-        end
-      end
+  # Defaults to the current values of the $CLASSPATH environment variable
+  CLASSPATH = [Pathname.new('.')]
+  
+  if ENV['CLASSPATH'] # if there is a CLASSPATH environment variable, let's use it.
+    ENV['CLASSPATH'].split(':').each do |string| # Add all class path env variables to the CLASSPATH as Pathnames
+      CLASSPATH.push( Pathname.new(string) )
     end
   end
-  CLASSPATH.map! { |string| Pathname.new(string) }
+  
+  CLASSPATH.uniq!
   
   # General Java::Class exception
   class ClassException < StandardError
