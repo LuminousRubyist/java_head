@@ -25,7 +25,8 @@ Use the two primary JavaHead classes, Package and Class, to represent Java packa
 ```ruby
 require 'java_head'
 
-# Set up classpath
+# JavaHead::CLASSPATH is an array of Pathnames that represent where JavaHead will search for your classes. Its initial value is created based on the CLASSPATH environment variable
+# You can also change your CLASSPATH like so:
 JavaHead::CLASSPATH.push(Pathname.new('/my/java/classpath'))
 
 # Get a package, this will load the package corresponding to /my/java/classpath/com/example/foo
