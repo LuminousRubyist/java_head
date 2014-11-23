@@ -1,6 +1,6 @@
 # JavaHead
 
-TODO: Write a gem description
+JavaHead is designed to run Java classes easily with familiar Ruby syntax. 
 
 ## Installation
 
@@ -20,11 +20,37 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Use the two primary JavaHead classes, Package and Class, to represent Java packages and classes, respectively. Here is some basic usage:
+
+```ruby
+require 'java_head'
+
+# Set up classpath
+JavaHead::CLASSPATH.push(Pathname.new('/my/java/classpath'))
+
+# Get a package, this will load the package corresponding to /my/java/classpath/com/example/foo
+package = JavaHead > 'com.example.foo'
+
+
+subpackage = package > 'bar'    # Pull up a subpackage
+subpackage.compile              # invoke javac to compile all files in the ppackage
+subpackage.remove_class         # remove .class files
+
+jclass = subpackage > 'MyClass' # Also JavaHead > 'com.example.foo.bar.MyClass' or 'com.example.foo.bar.MyClass'.java
+jclass.package == subpackage    # => true
+jclass.compile                  # Compile the class
+jclass.exec                     # Execute the compiled class
+jclass.remove_class             # Remove the .class file
+jclass.run                      # Do the same thing with only one method
+
+
+
+
+```
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/java_head/fork )
+1. Fork it ( https://github.com/AndrewTLee/java_head/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
