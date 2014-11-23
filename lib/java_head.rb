@@ -165,7 +165,7 @@ module JavaHead
       command << args.join(' ')
       command << ' '
       command << @path.to_s
-      system command
+      system command # run the command
       raise CompilerException, "Class #{fullname} could not compile" unless compiled?
       self
     end
@@ -201,9 +201,9 @@ module JavaHead
     # its arguments are passed to the exec method
     def run(*args)
       compile # this is a simple list of things for the interpreter to do
-      exec *args
+      output = exec *args
       remove_class
-      self # return self
+      output # return output
     end
   
     # Is the class compiled?
@@ -221,8 +221,7 @@ module JavaHead
         command << ' '
         command << arg
       end
-      system command
-      self
+       `#{command}`
     end
   
     # Inspect incorporates meaningful data like name, location and whether class is compiled

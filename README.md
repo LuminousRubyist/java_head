@@ -39,10 +39,11 @@ subpackage.remove_class         # remove .class files
 
 jclass = subpackage > 'MyClass' # Also JavaHead > 'com.example.foo.bar.MyClass' or 'com.example.foo.bar.MyClass'.java
 jclass.package == subpackage    # => true
-jclass.compile                  # Compile the class
-jclass.exec                     # Execute the compiled class
+jclass.compile                  # Compile the class, this returns the JavaHead::Class object
+jclass.exec                     # Execute the compiled class, this returns the output of the execution
 jclass.remove_class             # Remove the .class file
-jclass.run                      # Do the same thing with only one method
+jclass.run                      # Do the same thing with only one method, this returns the same as #exec()
+jclass.run('Hello','World')     # You can also pass command-line arguments to your Java programs
 
 
 
