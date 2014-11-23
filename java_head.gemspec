@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = JavaHead::VERSION
   spec.authors       = ["AndrewTLee"]
   spec.email         = ["andytaelee@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Represent, compile, and run Java code in Ruby.}
+  spec.description   = %q{JavaHead contains classes to reprsent Java packages and classes and execute them in Ruby. Use this in scripts to run Java programs from Ruby, or in IRB to develop Java in a sensible environment}
   spec.homepage      = ""
   spec.license       = "MIT"
 
