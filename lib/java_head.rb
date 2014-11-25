@@ -165,7 +165,7 @@ module JavaHead
       command << args.join(' ')
       command << ' '
       command << @path.to_s
-      system command # run the command
+      output = `#{command}`
       raise CompilerException, "Class #{fullname} could not compile" unless compiled?
       self
     end
@@ -221,7 +221,7 @@ module JavaHead
         command << ' '
         command << arg
       end
-       `#{command}`
+      `#{command}`
     end
   
     # Inspect incorporates meaningful data like name, location and whether class is compiled
@@ -229,17 +229,10 @@ module JavaHead
       "[Java Class, name: #{fullname}, path: #{@path}, #{ compiled? ? 'Compiled' : 'Not Compiled'}]"
     end
     
-    ARGFORMAT = /^\-?[A-Za-z0-9]*$/.freeze
+    ARGFORMAT = /^[A-Za-z0-9\-\:]*$/.freeze
     FORMAT = /^([a-z0-9.]+)?[A-Z][A-Za-z0-9]*$/.freeze
     
-    # Represents exceptions while compiling
-    class CompilerException < StandardError
-    end
     
-    
-    # Represents exceptions while running
-    class RunnerException < StandardError
-    end
   end
   
   # Methods in the eigenclass of Java
@@ -287,6 +280,15 @@ module JavaHead
   end
   # General Java::Package exception
   class PackageException < StandardError
+  end
+  
+  # Represents exceptions while compiling
+  class CompilerException < StandardError
+  end
+  
+  
+  # Represents exceptions while running
+  class RunnerException < StandardError
   end
   
 end
