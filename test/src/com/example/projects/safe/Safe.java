@@ -1,4 +1,4 @@
-package com.example.projects;
+package com.example.projects.safe;
 
 public class Safe {
 	private int a;

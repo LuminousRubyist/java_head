@@ -82,6 +82,13 @@ module JavaHead
       self
     end
     
+    def compiled?
+      classes.each do |jclass|
+        return false unless jclass.compiled?
+      end
+      true
+    end
+    
     # call #remove_class on all class files of the package
     def remove_class
       classes.each { |c| c.remove_class }
@@ -106,7 +113,7 @@ module JavaHead
     
     
     
-    FORMAT = /^[a-z0-9.]+$/.freeze
+    FORMAT = /^([a-z][a-z0-9]*\.)*[a-z_][a-z0-9_]*$/.freeze
     @@stored = Hash.new
     
     
@@ -229,8 +236,8 @@ module JavaHead
       "[Java Class, name: #{fullname}, path: #{@path}, #{ compiled? ? 'Compiled' : 'Not Compiled'}]"
     end
     
-    ARGFORMAT = /^[A-Za-z0-9\-\:]*$/.freeze
-    FORMAT = /^([a-z0-9.]+)?[A-Z][A-Za-z0-9]*$/.freeze
+    ARGFORMAT = /^[\-a-zA-Z@][a-zA-Z0-9\-:="'@]*$/.freeze
+    FORMAT = /^([a-z_][a-z0-9_]*\.)*[A-Z][a-z0-9_]*$/.freeze
     
     
   end
