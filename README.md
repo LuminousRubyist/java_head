@@ -54,7 +54,7 @@ jclass.run('Hello','World')     # You can also pass command-line arguments to yo
 
 ## Contributing
 
-1. Fork it ( https://github.com/AndrewTLee/java_head/fork )
+1. Fork it ( https://github.com/LuminousRubyist/java_head/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
