@@ -230,7 +230,7 @@ module JavaHead
   
     # Test to see if compilation works, args are passed to the compile method
     #
-    # @param [Array] *args the arguments to be passed to the #compile method
+    # @param [Array] args the arguments to be passed to the #compile method
     # @return [JavaHead::Class,NilClass] this class object or nil if the compilation failed
     def test(*args)
       compile(*args)
@@ -246,7 +246,7 @@ module JavaHead
     # compilation will succeed, so although this may fail,
     # its arguments are passed to the exec method
     #
-    # @param [Array] *args the arguments to be passed to the #exec method
+    # @param [Array] args the arguments to be passed to the #exec method
     # @return [String] the output created by the Java program
     def run(*args)
       compile # this is a simple list of things for the interpreter to do
@@ -264,7 +264,7 @@ module JavaHead
   
     # Take given command line arguments, check them for validity, add them to a java command and run the command to execute the class
     #
-    # @param [Array] *args the command-line arguments to be passed to the Java program
+    # @param [Array] args the command-line arguments to be passed to the Java program
     # @return [String] the output of the program execution
     def exec(*args)
       raise RunnerException, "Class #{fullname} cannot be run because it is not compiled" unless compiled?
