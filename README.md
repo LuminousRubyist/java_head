@@ -45,6 +45,8 @@ jclass.remove_class             # Remove the .class file
 jclass.run                      # Do the same thing with only one method, this returns the same as #exec()
 jclass.run('Hello','World')     # You can also pass command-line arguments to your Java programs
 
+# NOTE: This library requires that you install the java command line tools (java and javac) in order to function. If you do not, it will fail in mysterious ways due to an inability to compile or run Java
+
 
 
 
