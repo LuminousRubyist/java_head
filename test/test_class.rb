@@ -6,9 +6,10 @@ require 'java_head'
 class TestClass < MiniTest::Test
   
   def setup
-    JavaHead::CLASSPATH.push( Pathname.new("#{__dir__}/src") )
-    @safe = JavaHead::Class.new('com.example.projects.safe.Safe')
-    @broken = JavaHead::Class.new('com.example.projects.broken.Broken')
+    Dir.chdir("#{__dir__}/src") do
+      @safe = JavaHead::Class.new('com.example.projects.safe.Safe')
+      @broken = JavaHead::Class.new('com.example.projects.broken.Broken')
+    end
   end
   
   def test_safe_class_should_compile
@@ -26,7 +27,7 @@ class TestClass < MiniTest::Test
   end
   
   def test_broken_class_should_not_compile
-    assert_raises JavaHead::CompilerException do
+    assert_raises JavaHead::Exceptions::CompilerException do
       puts
       puts 'THE FOLLOWING JAVA ERROR IS EXPECTED, WE ARE TESTING THAT BROKEN CLASSES SHOULD NOT COMPILE'
       @broken.compile()
