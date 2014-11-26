@@ -1,4 +1,5 @@
- module JavaHead::Exceptions
+# A namespace to hold all exceptions defined by this library
+module JavaHead::Exceptions
 
   # a JavaHead exception
   class JavaHeadException < StandardError
@@ -18,4 +19,5 @@
   # Represents exceptions while running
   class RunnerException < ClassException
   end
+
 end

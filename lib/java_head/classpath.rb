@@ -9,5 +9,6 @@ module JavaHead
     end
   end
   
+  # Remove duplicates
   CLASSPATH.uniq!
 end

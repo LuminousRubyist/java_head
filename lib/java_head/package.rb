@@ -21,8 +21,7 @@ module JavaHead
 
       
       names = name.split('.') # An array of the package names, we will be using this a lot
-      
-      CLASSPATH.each do |base|
+      JavaHead::CLASSPATH.each do |base|
         absolute = base.join(*names)
         @path = absolute.realpath if absolute.exist? and absolute.directory?
       end
@@ -64,7 +63,9 @@ module JavaHead
     # @param [String] name the name of the child package
     # @return [JavaHead::Package] the child package
     def subpackage(name)
-      self.class.get("#{fullname}.#{name}")
+      Dir.chdir @path do
+        self.class.get("#{fullname}.#{name}")
+      end
     end
     
     # return a class within the current package
@@ -73,7 +74,9 @@ module JavaHead
     # @return [JavaHead::Class] the child class
     def class(name=nil)
       return super() if name.eql? nil
-      Class.new("#{fullname}.#{name}")
+      Dir.chdir @path do
+        JavaHead::Class.new("#{fullname}.#{name}")
+      end
     end
     
     # get all classes in the current package
@@ -120,7 +123,7 @@ module JavaHead
     # @param [String] name the name of the member element
     # @return [JavaHead::Package,JavaHead::Class] The child package or class
     def member(name)
-      if name.match Class::FORMAT
+      if name.match JavaHead::Class::FORMAT
         self.class(name)
       else
         subpackage(name)
@@ -155,5 +158,9 @@ module JavaHead
       
     end
     
+
+    # include all JavaHead Exceptions
+    include JavaHead::Exceptions
+
   end
 end

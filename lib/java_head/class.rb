@@ -10,7 +10,7 @@ module JavaHead
       
       names = name.split('.')
       @name = names.pop.freeze
-      @package = Package.get(names.join('.'))
+      @package = JavaHead::Package.get(names.join('.'))
       @path = @package.path.join("#{@name}.java")
       
       raise ClassException, "Location not found for class #{name}" unless @path.exist? and @path.file?
@@ -126,6 +126,8 @@ module JavaHead
     # The format for classnames, e.g. com.example.projects.Shape
     FORMAT = /^([a-z_][a-z0-9_]*\.)*[A-Z][a-z0-9_]*$/.freeze
     
-    
+    # include all JavaHead Exceptions
+    include JavaHead::Exceptions
+
   end
 end

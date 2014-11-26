@@ -16,7 +16,7 @@ module JavaHead
     # @param [String] name the name of the package to be found
     # @return [JavaHead::Package] the package corresponding to name
     def package(name)
-      Package.get(name)
+      JavaHead::Package.get(name)
     end
     
     # Returns the class with no arguments
@@ -26,7 +26,7 @@ module JavaHead
     # @return [JavaHead::Class] the resulting class
     def class(name = nil)
       return super() if name.eql? nil
-      Class.new(name)
+      JavaHead::Class.new(name)
     end
     
     # Creates either a class or a package
@@ -35,7 +35,7 @@ module JavaHead
     # @param [String] name the name of the child element
     # @return [JavaHead::Package, JavaHead::Class] the resulting package or class object
     def member(name)
-      if name.match Class::FORMAT
+      if name.match JavaHead::Class::FORMAT
         self.class(name)
       else
         package(name)
@@ -50,7 +50,7 @@ module JavaHead
     # @param [String] const_name
     # @return [Regexp,Array,Class] the value of the constant const_name in the namespace of JavaHead
     def const_missing(const_name)
-      require "#{__dir__}/java_head/#{const_name}.rb"
+      require "#{__dir__}/java_head/#{const_name.to_s.downcase}.rb"
       return const_get const_name
     rescue LoadError
       super
