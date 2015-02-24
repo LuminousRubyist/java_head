@@ -124,7 +124,7 @@ module JavaHead
     # The format for command-line arguments
     ARGFORMAT = /^[\-a-zA-Z@][a-zA-Z0-9\-:="'@]*$/.freeze
     # The format for classnames, e.g. com.example.projects.Shape
-    FORMAT = /^([a-z_][a-z0-9_]*\.)*[A-Z][a-z0-9_]*$/.freeze
+    FORMAT = /^([a-z_][a-z0-9_]*\.)*[A-Z]\w*$/.freeze
     
     # include all JavaHead Exceptions
     include JavaHead::Exceptions
